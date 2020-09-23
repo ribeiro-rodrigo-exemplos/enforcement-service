@@ -47,7 +47,7 @@ def make_default_enforcement(cluster_name: str, config: Config) -> Callable[[], 
         repo=config.enforcement_core_repo,
         path=config.enforcement_core_path,
         cluster_name='in-cluster',
-        _name=config.enforcement_name,
+        _name=f"{cluster_name}-{config.enforcement_name}",
     )
 
     default_enforcement.add_parameter('spec.destination.name', cluster_name)

@@ -23,7 +23,7 @@ class ClusterMonitor:
 
         cluster_info_names = [cluster['name'] for cluster in self._argo_clusters_info]
 
-        return list(
+        teste =  list(
             map(
                 lambda cluster_map: self._cluster_factory.create(cluster_map),
                 filter(
@@ -32,6 +32,8 @@ class ClusterMonitor:
                 )
             )
         )
+
+        return teste
 
     def detect_deleted_clusters(self) -> List[Cluster]:
 
