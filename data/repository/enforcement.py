@@ -27,7 +27,7 @@ class EnforcementRepository:
                 source=enforcement.render(),
                 sync_policy=V1alpha1SyncPolicy(
                     automated=V1alpha1SyncPolicyAutomated(
-                        prune=True,
+                        prune=False,
                         self_heal=True,
                     )
                 )
