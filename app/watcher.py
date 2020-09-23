@@ -12,9 +12,8 @@ class EnforcementWatcher:
     def run(self):
 
         for cluster in self._cluster_monitor.detect_new_clusters():
-                if cluster.name != 'argocd-dev':
-                    self._cluster_monitor.register(cluster)
-                    cluster.apply_all_enforcements()
+            self._cluster_monitor.register(cluster)
+            cluster.apply_all_enforcements()
 
         for cluster in self._cluster_monitor.detect_deleted_clusters():
             cluster.remove_all_enforcements()
