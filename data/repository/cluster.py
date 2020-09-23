@@ -3,6 +3,8 @@ from injector import inject
 from typing import List
 
 from model.cluster import Cluster
+from helper.logger import logger
+
 
 from argocd_client import ClusterServiceApi, V1alpha1Cluster, V1alpha1ClusterList, \
     V1alpha1ClusterConfig, V1alpha1TLSClientConfig
@@ -19,8 +21,8 @@ class ClusterRepository:
         return info
 
     def unregister_cluster(self, cluster: Cluster):
-        print(cluster)
         self._cluster_service.delete(server=cluster.url, name=cluster.name)
+        logger.info(f"cluster {cluster.name} unregistered")
 
     def register_cluster(self, cluster: Cluster):
 
@@ -33,4 +35,4 @@ class ClusterRepository:
             ),
         )
         self._cluster_service.create(argo_cluster)
-
+        logger.info(f"cluster {cluster.name} registered")

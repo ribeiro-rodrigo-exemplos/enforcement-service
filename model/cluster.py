@@ -23,7 +23,8 @@ class Cluster:
             self._enforcement_repository.create_enforcement(enforcement)
 
     def remove_all_enforcements(self):
-        pass
+        for enforcement in self._enforcements:
+            self._enforcement_repository.remove_enforcement(enforcement)
 
     def _detect_enforcements(self):
         self._enforcements.append(self._default_enforcement_factory())
