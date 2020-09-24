@@ -11,11 +11,7 @@ class Enforcement:
     repo: str
     path: str
     cluster_name: str
-    _name: str
-
-    @property
-    def name(self):
-        return f"{self.cluster_name}-{self._name}"
+    name: str
 
     def render(self) -> V1alpha1ApplicationSource:
         source = V1alpha1ApplicationSource(path=self.path, repo_url=self.repo)
@@ -43,11 +39,12 @@ class EnforcementHelm(Enforcement):
 
 
 def make_default_enforcement(cluster_name: str, config: Config) -> Callable[[], EnforcementHelm]:
+    
     default_enforcement = EnforcementHelm(
         repo=config.enforcement_core_repo,
         path=config.enforcement_core_path,
         cluster_name='in-cluster',
-        _name=f"{cluster_name}-{config.enforcement_name}",
+        name=f"{cluster_name}-{config.enforcement_name}",
     )
 
     default_enforcement.add_parameter('spec.destination.name', cluster_name)
