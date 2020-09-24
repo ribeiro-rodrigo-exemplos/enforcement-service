@@ -23,7 +23,7 @@ class ClusterMonitor:
 
         cluster_info_names = [cluster['name'] for cluster in self._argo_clusters_info]
 
-        teste =  list(
+        return list(
             map(
                 lambda cluster_map: self._cluster_factory.create(cluster_map),
                 filter(
@@ -33,8 +33,6 @@ class ClusterMonitor:
             )
         )
 
-        return teste
-
     def detect_deleted_clusters(self) -> List[Cluster]:
 
         clusters_map = {cluster['name']: cluster for cluster in self._rancher_clusters}
@@ -43,7 +41,7 @@ class ClusterMonitor:
             map(
                 lambda cluster_info: self._cluster_factory.create(cluster_info),
                 filter(
-                    lambda cluster_info: cluster_info["name"] not in clusters_map,
+                    lambda cluster_info: cluster_info["name"] not in clusters_map and cluster_info["name"] != 'in-cluster',
                     self._argo_clusters_info
                 )
             )

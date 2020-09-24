@@ -47,6 +47,6 @@ class EnforcementRepository:
             )
         )
 
-        self._application_service.delete_mixin9(application.metadata.name)
+        self._application_service.delete_mixin9(application.metadata.name, cascade=True)
         logger.info(f"Application {application.metadata.name} removed")
 
